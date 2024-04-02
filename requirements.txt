@@ -1,7 +1,0 @@
-scikit_learn
-pandas
-datasets
-accelerate
-transformers @ git+https://github.com/huggingface/transformers@main
-causal-conv1d>=1.2.0
-mamba-ssm
