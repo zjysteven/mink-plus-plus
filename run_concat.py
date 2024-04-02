@@ -144,7 +144,7 @@ for method, scores in scores.items():
 df = pd.DataFrame(results)
 print(df)
 
-save_root = f"results/{args.dataset}"
+save_root = f"results/WikiMIA_concat"
 if not os.path.exists(save_root):
     os.makedirs(save_root)
 
