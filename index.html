@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DERZX1PWZ4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-DERZX1PWZ4');
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="description" content="Detecting Pretraining Data from Large Language Models">
+  <meta name="keywords"
+    content="Membership Inference Attack, Copyrighted Information Detection, Dataset contamination, GPT-3">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Detecting Pretraining Data from Large Language Models</title>
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-MFCT45H');</script>
+  <!-- End Google Tag Manager -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/tifa.png">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MFCT45H" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+
+  <!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://yushi-hu.github.io">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://finegrainedrlhf.github.io/">
+            Fine-Grained RLHF
+          </a>
+          <a class="navbar-item" href="https://yushi-hu.github.io/promptcap_demo/">
+            PromptCap
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              <span class="big-emoji">&#x1F575;&#xFE0F;</span>
+              Detecting Pretraining Data from Large Language Models
+            </h1>
+            <div class="is-size-5">
+              <span class="author-block">
+                <a href="http://swj0419.github.io" style="color:#f68946;font-weight:normal;">Weijia
+                  Shi<sup>*</sup></a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://anirudhajith.github.io/about/" style="color:#008AD7;font-weight:normal;">Anirudh Ajith<sup>*</sup></a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://xiamengzhou.github.io/" style="color:#008AD7;font-weight:normal;">Mengzhou
+                  Xia</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://hazelsuko07.github.io/yangsibo/" style="color:#008AD7;font-weight:normal;">Yangsibo
+                  Huang</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://daogaoliu.github.io/" style="color:#f68946;font-weight:normal;">Daogao
+                  Liu</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://blvns.github.io/" style="color:#f68946;font-weight:normal;">Terra
+                  Blevins</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.cs.princeton.edu/~danqic/" style="color:#008AD7;font-weight:normal;">Danqi
+                  Chen</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.cs.washington.edu/people/faculty/lsz" style="color:#f68946;font-weight:normal;">Luke
+                  Zettlemoyer</a><sup>1</sup>,
+              </span>
+            </div>
+  
+            <br>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><b style="color:#f68946; font-weight:normal">▶ </b>University of
+                Washington</span>
+              <span class="author-block"><b style="color:#008AD7; font-weight:normal">▶ </b>Princeton University</span>
+              <span class="author-block">&nbsp;&nbsp;<sup>*</sup>Equal Contribution</span>
+            </div>
+
+            
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- PDF Link. -->
+                  <span class="link-block">
+                    <a href="https://arxiv.org/pdf/2310.16789.pdf" class="external-link button is-normal is-rounded is-dark">
+                      <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                      </span>
+                      <span>Paper</span>
+                    </a>
+                  </span>
+
+              <!-- code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/swj0419/detect-pretrain-code" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+                <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/swj0419/WikiMIA"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="far fa-images"></i>
+                    </span>
+                    <span>WikiMIA datasets</span>
+                  </a>
+                </span>
+
+                  <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/swj0419/BookMIA"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="far fa-images"></i>
+                    </span>
+                    <span>BookMIA datasets</span>
+                  </a>
+                </span>
+    
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <h2 class="subtitle has-text-centered">
+  We propose <b>Min-K% Prob</b> <img src="static/images/min-k_icon.png" alt="Min-K icon" style="width:25px; height:25px;">, a
+  simple and effective method that can detect whether if a large language model (e.g., GPT-3) was pretrained on the provided
+  text without knowing the pretraining data.</b>
+  
+      <img src="./static/images/intro2.png" alt="teaser">
+
+      
+
+
+<h3 class="subtitle">
+    <style>
+      .subtitle a {
+        color: blue;
+      }
+    </style>
+  Min-K% Prob is an effective tool for <b>benchmark example contamination detection</b>,
+  <a href="#privacy-auditing"><b>privacy auditing of machine unlearning</b></a>,
+  and <a href="#copyrighted-detection"><b>copyrighted text detection</b></a> in language models' pretraining
+  data.
+</h3>
+
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Although large language models (LLMs) are widely deployed, the data used to train them is rarely disclosed.
+            Given the
+            incredible scale of this data, up to trillions of tokens, it's nearly certain it includes potentially
+            problematic
+            text such as copyrighted materials, personally identifiable information, and test data for widely reported
+            reference
+            benchmarks. However, we currently lack knowledge on which data of these types is included or in what
+            proportions.
+          </p>
+
+           <li><b>Pretraining Ddata detection problem</b>. In this paper, we explore the pretraining data detection problem<span>&#x1F575;&#xFE0F;</span>: given a piece of
+            text and
+            black-box access to an LLM without knowing the pretraining data, can we determine if the model was trained
+            on the
+            provided text? 
+            
+            <li><b>Dynamic benchmark WikiMIA</b>. To aid this study, we present <b><a href="https://huggingface.co/datasets/swj0419/WikiMIA"
+                target="_blank">
+                a dynamic benchmark WikiMIA</a></b> <span>&#128214;</span> that uses data created both before and
+            after model training
+            to support gold truth detection.
+
+          <li><b>Detection method Min-K% Prob</b>. We also design a new <b><a href="https://github.com/swj0419/detect-pretrain-code" target="_blank">detection
+                method Min-K%
+                Prob</a></b> <img src="static/images/min-k_icon.png" alt="Min-K Icon" style="width:25px; height:25px;">. This is built
+            on a straightforward
+            hypothesis: an unobserved example is more likely to have a few outlier words with low probabilities under
+            the LLM,
+            while a recognized example is less inclined to contain words with such reduced probabilities. Min-K% Prob
+            operates
+            without any insight into the pretraining corpus or any extra training, distinguishing it from past detection
+            strategies
+            that necessitate educating a reference model on data analogous to the pretraining data. Furthermore, our
+            tests indicate
+            that Min-K% Prob delivers a 7.4% enhancement on WikiMIA relative to these preceding techniques. 
+
+            <li><b>Real-life use cases</b>. We employ
+            Min-K% Prob in
+            three real-life contexts: <strong>benchmark example contamination detection</strong>,
+            <a href="#privacy-auditing"><strong>privacy auditing of machine unlearning</strong></a>,
+            and <a href="#copyrighted-detection"><strong>copyrighted text detection</strong></a> in language models' pretraining
+            data.
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Detection Method Min-K% Prob</h2>
+        <div class="content has-text-justified">
+          <p>
+            <strong>What is Min-K% Prob?</strong><br>
+            We propose a pretraining data detection method named Min-K% Prob. Our method is based on a simple
+            hypothesis: an unseen example tends to contain a few outlier words with low probabilities, whereas a seen
+            example is less likely to contain words with such low probabilities. MIN-K% Prob computes the average
+            probabilities of outlier tokens.
+          </p>
+
+          <p>
+            <strong>How to use Min-K% Prob?</strong><br>
+            To check if a text was in LLM's pretraining:
+          <ol>
+            <li>Evaluate token probabilities in the text.</li>
+            <li>Pick the k% tokens with minimum probabilities.</li>
+            <li>Compute their average log likelihood.</li>
+          </ol>
+          If the average log likelihood is high, the text is likely in the pretraining data. ✅
+          </p>
+
+<a href="https://arxiv.org/pdf/2310.16789.pdf" target="_blank">See more results in our paper</a>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" id="privacy-auditing">Auditing machine unlearning with Min-K% Prob</h2>
+        <div class="content has-text-justified">
+          <p>
+            <strong>Machine Unlearning</strong><br>
+            <a href="https://www.microsoft.com/en-us/research/project/physics-of-agi/articles/whos-harry-potter-making-llms-forget-2/"> Recent work from MSR </a> shows how LLMs can unlearn copyrighted training data via strategic fine-tuning.
+            They made Llama2-7B-chat unlearn the entire Harry Potter magical world and released it as
+            <a href="https://huggingface.co/microsoft/Llama2-7b-WhoIsHarryPotter">Llama2-7B-WhoIsHarryPotter</a> for
+            scrutiny.
+            But with our Min-K% Prob technique, we've found that some “magical traces” still remain, producing Harry
+            Potter content! 🧙‍♂️🔮
+          </p>
+          <p>
+            <img src="./static/images/unlearn_full.png"
+              alt="Graph depicting the process of unlearning Harry Potter content">
+          </p>
+          <p>
+            <strong> Auditing machine unlearning with Min-K% Prob </strong> <br>
+            The unlearned model LLaMA2-7B-WhoIsHarryPotter answers the questions related to Harry
+              Potter correctly. We manually cross-checked these responses against the Harry Potter book series
+            for verification.<br>
+            <img src="./static/images/unlearn_result.png" alt="Results showing the unlearned model's responses">
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <!-- <h2 class="title is-3" id="copyrighted-detection">Copyrighted Book Detection</h2> -->
+        <h2 class="title is-3" id="copyrighted-detection">Detecting Copyrighted Books in LLMs with Min-K% Prob</h2>
+        <div class="content has-text-justified">
+
+        <!-- <title>Top 20 Copyrighted Books in GPT-3's (text-davinci-003) Pretraining Data detected by Min-K% Prob</title> -->
+        <style>
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+
+          table,
+          th,
+          td {
+            border: 1px solid black;
+          }
+
+          th,
+          td {
+            padding: 8px;
+            text-align: left;
+          }
+
+          th {
+            background-color: #f2f2f2;
+          }
+        </style>
+      </head>
+
+      <body>
+
+        <table>
+          <caption><b style="color: red;">Top 20 Copyrighted Books in GPT-3's pretraining data (text-davinci-003) detected by Min-K%
+            Prob</b> (Min-K% Prob achieves AUC score of 0.87 on the validation data). The listed contamination rate represents the
+            percentage of text excerpts from each book identified in the pretraining data.</caption>
+          <thead>
+            <tr>
+              <th>Contamination %</th>
+              <th>Book Title</th>
+              <th>Author</th>
+              <th>Year</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>100</td>
+              <td>The Violin of Auschwitz</td>
+              <td>Maria Àngels Anglada</td>
+              <td>2010</td>
+            </tr>
+            <tr>
+              <td>100</td>
+              <td>North American Stadiums</td>
+              <td>Grady Chambers</td>
+              <td>2018</td>
+            </tr>
+            <tr>
+              <td>100</td>
+              <td>White Chappell Scarlet Tracings</td>
+              <td>Iain Sinclair</td>
+              <td>1987</td>
+            </tr>
+            <tr>
+              <td>100</td>
+              <td>Lost and Found</td>
+              <td>Alan Dean</td>
+              <td>2001</td>
+            </tr>
+            <tr>
+              <td>100</td>
+              <td>A Different City</td>
+              <td>Tanith Lee</td>
+              <td>2015</td>
+            </tr>
+            <tr>
+              <td>100</td>
+              <td>Our Lady of the Forest</td>
+              <td>David Guterson</td>
+              <td>2003</td>
+            </tr>
+            <tr>
+              <td>100</td>
+              <td>The Expelled</td>
+              <td>Mois Benarroch</td>
+              <td>2013</td>
+            </tr>
+            <tr>
+              <td>99</td>
+              <td>Blood Cursed</td>
+              <td>Archer Alex</td>
+              <td>2013</td>
+            </tr>
+            <tr>
+              <td>99</td>
+              <td>Genesis Code: A Thriller of the Near Future</td>
+              <td>Jamie Metzl</td>
+              <td>2014</td>
+            </tr>
+            <tr>
+              <td>99</td>
+              <td>The Sleepwalker's Guide to Dancing</td>
+              <td>Mira Jacob</td>
+              <td>2014</td>
+            </tr>
+            <tr>
+              <td>99</td>
+              <td>The Harlan Ellison Hornbook</td>
+              <td>Harlan Ellison</td>
+              <td>1990</td>
+            </tr>
+            <tr>
+              <td>99</td>
+              <td>The Book of Freedom</td>
+              <td>Paul Selig</td>
+              <td>2018</td>
+            </tr>
+            <tr>
+              <td>99</td>
+              <td>Three Strong Women</td>
+              <td>Marie NDiaye</td>
+              <td>2009</td>
+            </tr>
+            <tr>
+              <td>99</td>
+              <td>The Leadership Mind Switch: Rethinking How We Lead in the New World of Work</td>
+              <td>D. A. Benton, Kylie Wright-Ford</td>
+              <td>2017</td>
+            </tr>
+            <tr>
+              <td>99</td>
+              <td>Gold</td>
+              <td>Chris Cleave</td>
+              <td>2012</td>
+            </tr>
+            <tr>
+              <td>99</td>
+              <td>The Tower</td>
+              <td>Simon Clark</td>
+              <td>2005</td>
+            </tr>
+            <tr>
+              <td>98</td>
+              <td>Amazon</td>
+              <td>Bruce Parry</td>
+              <td>2009</td>
+            </tr>
+            <tr>
+              <td>98</td>
+              <td>Ain't It Time We Said Goodbye: The Rolling Stones on the Road to Exile</td>
+              <td>Robert Greenfield</td>
+              <td>2014</td>
+            </tr>
+            <tr>
+              <td>98</td>
+              <td>Page One</td>
+              <td>David Folkenflik</td>
+              <td>2011</td>
+            </tr>
+            <tr>
+              <td>98</td>
+              <td>Road of Bones: The Siege of Kohima 1944</td>
+              <td>Fergal Keane</td>
+              <td>2010</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </body>
+
+      </html>
+
+    </div>
+  </div>
+</section>
+
+
+      <section class="section is-light" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <h2 class="title">BibTeX</h2>
+          <pre><code>
+@misc{shi2023detecting,
+title={Detecting Pretraining Data from Large Language Models},
+author={Weijia Shi and Anirudh Ajith and Mengzhou Xia and Yangsibo Huang and Daogao Liu and Terra Blevins and Danqi Chen
+and Luke Zettlemoyer},
+year={2023},
+eprint={2310.16789},
+archivePrefix={arXiv},
+primaryClass={cs.CL}
+}
+</code></pre>
+        </div>
+      </section>
+
+
+
+      <footer class="footer">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-8">
+              <div class="content">
+                <p>
+                  This website is licensed under a <a rel="license"
+                    href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                    Commons Attribution-ShareAlike 4.0 International License</a>.
+                </p>
+                <p>
+                  This means you are free to borrow the <a href="https://github.com/nerfies/nerfies.github.io">source
+                    code</a> of this website,
+                  we just ask that you link back to this page in the footer.
+                  Please remember to remove the analytics code included in the header of the website which
+                  you do not want on your website.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+</body>
+
+</html>
