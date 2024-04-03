@@ -1,4 +1,4 @@
-# Min-K%++: Improved Baseline for Detecting Pre-Training Data for LLMs
+# Min-K%++: Improved Baseline for Detecting Pre-Training Data of LLMs
 
 ## Overview
 
