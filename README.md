@@ -4,12 +4,13 @@
 
 ![teaser figure](images/teaser_w_results.png)
 
-We propose a new Membership Inference Attack method named Min-K%++ for detecting pre-training data of LLMs, which achieves SOTA results among reference-free methods. This repo contains the lightweight implementation of our method (along with all the baselines) on the [WikiMIA benchmark](https://huggingface.co/datasets/swj0419/WikiMIA). For experiments on the [MIMIR benchmark](https://github.com/iamgroot42/mimir), please refer to our fork here (coming soon).
+We propose a new Membership Inference Attack method named **Min-K%++** for detecting pre-training data of LLMs, which achieves SOTA results among reference-free methods. This repo contains the lightweight implementation of our method (along with all the baselines) on the [WikiMIA benchmark](https://huggingface.co/datasets/swj0419/WikiMIA). For experiments on the [MIMIR benchmark](https://github.com/iamgroot42/mimir), please refer to our fork here (coming soon).
 
+[![arXiv](https://img.shields.io/badge/arXiv-2404.02936-b31b1b.svg?)](https://arxiv.org/abs/2404.02936)
 
 ## Setup
 ### Environment
-First Install torch according to your environment. Then simply install dependencies by `pip install -r requirements.txt`. It will install the latest `transformer` library from the github main branch, which is required to run Mamba models.
+First install torch according to your environment. Then simply install dependencies by `pip install -r requirements.txt`. It will install the latest `transformer` library from the github main branch, which is required to run Mamba models.
 
 Our code is tested with Python 3.8, PyTorch 2.2.0, Cuda 12.1.
 
@@ -34,4 +35,12 @@ The outputs of these scripts will be a csv file consisting of method results (AU
 This codebase is adapted from the [official repo](https://github.com/swj0419/detect-pretrain-code) of Min-K% and WikiMIA.
 
 ## Citation
-Coming soon...
+If you find this work/repo/data splits useful, please consider citing our paper:
+```
+@article{zhang2024mink++,
+  title={Min-K%++: Improved Baseline for Detecting Pre-Training Data from Large Language Models},
+  author={Zhang, Jingyang and Sun, Jingwei and Yeats, Eric and Yang, Ouyang and Kuo, Martin and Zhang, Jianyi and Yang, Hao and Li, Hai},
+  journal={arXiv preprint arXiv:2404.02936},
+  year={2024}
+}
+```
