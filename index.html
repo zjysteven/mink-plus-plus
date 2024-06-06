@@ -191,7 +191,7 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <h2 class="subtitle has-text-centered">
-  <img src="./static/images/teaser_w_results.png" alt="teaser">
+  <img src="./static/images/teaser_w_results_v1.png" alt="teaser">
 
       
 
@@ -207,8 +207,9 @@
   privacy auditing, and evaluation data contamination.<br><br> 
   
   Our method, named <b>Min-K%++</b>, is theoretically motivated by revisiting LLM's 
-  training objective (maximum likelihood estimation) through the lens of score matching. We show that LLM training implicitly minimizes
-  the Hessian trace of log likelihood, which encodes rich second-order information and can thus serve as a robust indicator for flagging training data.<br><br>
+  training objective (maximum likelihood estimation, MLE) through the lens of score matching. We show that the general MLE training under continuous distribution
+  will tend to make training samples be (or locate near) the local maxima along each input dimension. Then, translating this insight into a practical method for LLMs, 
+  we propose to detect training data by inspecting whether the tokens in the input text form modes (or have relatively high probability) under the conditional categorical distribution modeled by LLMs.<br><br>
 
   Empirically, Min-K%++ achieves state-of-the-art performance on the <a href="#wikimia">WikiMIA</a> benchmark, outperforming existing approaches by large margin (showcased by the above figure right panel). 
   On the more challenging <a href="#mimir">MIMIR</a> benchmark, Min-K%++ is also the best among reference-free methods and performs on par with reference-based methods.
