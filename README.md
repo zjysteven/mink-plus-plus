@@ -31,6 +31,15 @@ There are four scripts, each of which is self-contained to best facilitate quick
 
 The outputs of these scripts will be a csv file consisting of method results (AUROC and TPR@FPR=5%) stored in the `results` directory, with the filepath indicating the dataset and model. Sample results by running the four scripts are provided in the `results` directory.
 
+## HF paths of evaluated model in the paper
+- Mamba: [state-spaces/mamba-1.4b](https://huggingface.co/state-spaces/mamba-1.4b)
+, [state-spaces/mamba-2.8b](https://huggingface.co/state-spaces/mamba-2.8b)
+- Pythia: [EleutherAI/pythia-2.8b](https://huggingface.co/EleutherAI/pythia-2.8b), [EleutherAI/pythia-6.9b](https://huggingface.co/EleutherAI/pythia-6.9b), [EleutherAI/pythia-12b](https://huggingface.co/EleutherAI/pythia-12b)
+- GPT-NeoX: [EleutherAI/gpt-neox-20b](https://huggingface.co/EleutherAI/gpt-neox-20b)
+- LLaMA: [huggyllama/llama-13b](https://huggingface.co/huggyllama/llama-13b), [huggyllama/llama-30b](https://huggingface.co/huggyllama/llama-30b), [huggyllama/llama-65b](https://huggingface.co/huggyllama/llama-65b)
+- OPT: [facebook/opt-66b](https://huggingface.co/facebook/opt-66b)
+
+
 ## Acknowledgement
 This codebase is adapted from the [official repo](https://github.com/swj0419/detect-pretrain-code) of Min-K% and WikiMIA.
 
