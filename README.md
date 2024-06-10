@@ -10,7 +10,7 @@ We propose a new Membership Inference Attack method named **Min-K%++** for detec
 
 ## Setup
 ### Environment
-First install torch according to your environment. Then simply install dependencies by `pip install -r requirements.txt`. It will install the latest `transformer` library from the github main branch, which is required to run Mamba models.
+First install torch according to your environment. Then simply install dependencies by `pip install -r requirements.txt`. It will install the latest `transformer` library from the github main branch, which is required to run Mamba models as of 2024/04.
 
 Our code is tested with Python 3.8, PyTorch 2.2.0, Cuda 12.1.
 
