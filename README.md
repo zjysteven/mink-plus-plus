@@ -47,10 +47,12 @@ This codebase is adapted from the [official repo](https://github.com/swj0419/det
 ## Citation
 If you find this work/repo/data splits useful, please consider citing our paper:
 ```
-@article{zhang2024min,
-  title={Min-K\%++: Improved Baseline for Detecting Pre-Training Data from Large Language Models},
-  author={Zhang, Jingyang and Sun, Jingwei and Yeats, Eric and Ouyang, Yang and Kuo, Martin and Zhang, Jianyi and Yang, Hao and Li, Hai},
-  journal={arXiv preprint arXiv:2404.02936},
-  year={2024}
+@inproceedings{
+  zhang2025mink,
+  title={Min-K\%++: Improved Baseline for Pre-Training Data Detection from Large Language Models},
+  author={Jingyang Zhang and Jingwei Sun and Eric Yeats and Yang Ouyang and Martin Kuo and Jianyi Zhang and Hao Frank Yang and Hai Li},
+  booktitle={The Thirteenth International Conference on Learning Representations},
+  year={2025},
+  url={https://openreview.net/forum?id=ZGkfoufDaU}
 }
 ```
