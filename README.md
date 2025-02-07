@@ -7,7 +7,7 @@
 We propose a new Membership Inference Attack method named **Min-K%++** for detecting pre-training data of LLMs, which achieves SOTA results among reference-free methods. This repo contains the lightweight implementation of our method (along with all the baselines) on the [WikiMIA benchmark](https://huggingface.co/datasets/swj0419/WikiMIA). For experiments on the [MIMIR benchmark](https://github.com/iamgroot42/mimir), please refer to our fork [here](https://github.com/zjysteven/mimir).
 
 [![arXiv](https://img.shields.io/badge/arXiv-2404.02936-b31b1b.svg?)](https://arxiv.org/abs/2404.02936)
-[![openreview](https://img.shields.io/badge/ICLR-openreview-blue)](https://openreview.net/forum?id=ZGkfoufDaU))
+[![openreview](https://img.shields.io/badge/ICLR-openreview-blue)](https://openreview.net/forum?id=ZGkfoufDaU)
 
 
 
