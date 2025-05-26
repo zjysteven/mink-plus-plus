@@ -2,6 +2,6 @@ scikit_learn
 pandas
 datasets
 accelerate
-transformers @ git+https://github.com/huggingface/transformers@main
+transformers==4.39.0
 causal-conv1d>=1.2.0
-mamba-ssm
+mamba-ssm==1.2.0.post1
